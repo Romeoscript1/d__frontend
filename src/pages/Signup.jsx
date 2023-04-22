@@ -5,8 +5,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Link } from 'react-router-dom';
+import { Link  as Linked} from 'react-router-dom';
 import Grid from '@mui/material/Grid';
+import { Link } from '@mui/material';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -117,9 +118,9 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/" variant="body2">
+                <Linked to="/">
                   Already have an account? Sign in
-                </Link>
+                </Linked>
               </Grid>
             </Grid>
           </Box>
