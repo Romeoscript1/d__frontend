@@ -1,4 +1,7 @@
 import React from "react";
+import Download from "../components/Download";
+import FAQ from "../components/Faq";
+import Join from "../components/Join";
 import Layout from "../components/Layout";
 import Wrapper from "../components/Wrapper";
 
@@ -39,6 +42,9 @@ const Home = () => {
             );
           })}
         </div>
+        <Join />
+        <Download />
+        <FAQ />
       </Layout>
     </div>
   );
