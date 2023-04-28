@@ -3,6 +3,7 @@ import Download from "../components/Download";
 import FAQ from "../components/Faq";
 import Join from "../components/Join";
 import Layout from "../components/Layout";
+import TestimonialCard from "../components/TestimonialCard";
 import Wrapper from "../components/Wrapper";
 
 const Home = () => {
@@ -43,6 +44,7 @@ const Home = () => {
           })}
         </div>
         <Join />
+        <TestimonialCard />
         <Download />
         <FAQ />
       </Layout>
