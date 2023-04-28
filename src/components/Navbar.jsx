@@ -38,7 +38,7 @@ function Navbar() {
 
   return (
     <AppBar position="fixed" className='h-[80px]'>
-      <Container maxWidth="xl" className='h-full bg-[teal]'>
+      <Container maxWidth="xl" className='h-full bg-[#130D25]'>
         <Toolbar disableGutters style={{height:'100%'}}>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
