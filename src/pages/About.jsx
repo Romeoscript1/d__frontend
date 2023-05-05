@@ -8,7 +8,7 @@ const About = () => {
   return (
     <div>
       <Layout>
-        <Banner>
+        <Banner className='about'>
           <div className="text-5xl font-bold text-white h-full z-20 flex items-center p-[4rem] justify-left">
             About Us
           </div>

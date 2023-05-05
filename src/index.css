@@ -26,6 +26,11 @@
   display: inline-block;
   margin-bottom: 0.938rem;
 }
+.terms{
+  background-image: url(../src/assets/ballbg.png);
+    background-repeat: no-repeat;
+    background-position: top;
+}
 .about {
   background-image: url(../src/assets/about-banner.png),
     url(../src/assets/banner-overlay.png), url(../src/assets/about-bg.png);
