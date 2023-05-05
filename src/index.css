@@ -13,6 +13,13 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+.about {
+  background-image: url(../src/assets/about-banner.png),
+    url(../src/assets/banner-overlay.png), url(../src/assets/about-bg.png);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: right, right bottom -1px, top;
+  background-size: contain;
+}
 
 @tailwind base;
 @tailwind components;
