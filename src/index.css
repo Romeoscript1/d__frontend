@@ -13,6 +13,19 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+.about_subtitle{
+  font-family: Raleway;
+  font-weight: 700;
+  font-size: 3.125rem;
+  text-transform: uppercase;
+  line-height: 1.4;
+  background: #880065;
+  background: linear-gradient(90deg,#880065,#d70021);
+  color: transparent;
+  -webkit-background-clip: text;
+  display: inline-block;
+  margin-bottom: 0.938rem;
+}
 .about {
   background-image: url(../src/assets/about-banner.png),
     url(../src/assets/banner-overlay.png), url(../src/assets/about-bg.png);
