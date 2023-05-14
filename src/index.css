@@ -38,6 +38,9 @@
   background-position: right, right bottom -1px, top;
   background-size: contain;
 }
+.css-1nmdiq5-menu{
+background-color: grey!important;
+}
 
 @tailwind base;
 @tailwind components;

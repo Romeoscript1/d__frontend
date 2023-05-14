@@ -88,7 +88,7 @@ class PressReleaseWidget extends Component {
 				<div className="newsFeed__heading d-flex flex-row align-items-center justify-content-between">
 					<h3 className="newsFeed__title">News</h3>
 					<Select
-						className="newsFeed__sources"
+						className="newsFeed__sources bg-[black] text-[white]"
 						placeholder="Filter By Source"
 						value={this.state.selectedSource}
 						options={sources.length > 0 ? sources : null}
