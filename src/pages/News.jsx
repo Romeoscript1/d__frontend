@@ -6,7 +6,7 @@ const News = () => {
   return (
     <div>
       <Layout>
-        <div>
+        <div className="mt-[6rem] px-[4rem] bg-white">
          <PressReleaseWidget />
         </div>
       </Layout>

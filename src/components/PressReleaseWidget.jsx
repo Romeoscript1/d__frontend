@@ -1,95 +1,120 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import NewsItem from './NewsItem';
 import '../assets/NewsItem.css';
 import Select from 'react-select';
-import '../assets/Press.css';
 
-function PressReleaseWidget() {
-	const [articles, setArticles] = useState([]);
-	const [sources, setSources] = useState([]);
-	const [currentPage, setCurrentPage] = useState(1);
-	const [maxPages, setMaxPages] = useState(1);
-	const [selectedSource, setSelectedSource] = useState('');
+// import 'react-select/dist/react-select.css';
+import '../assets/Press.css'
 
-	useEffect(() => {
-		getNews();
-		getSources();
-	}, []);
-
-	function handleShowMore() {
-		if (currentPage < maxPages) {
-			setCurrentPage(currentPage + 1);
+class PressReleaseWidget extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			articles: [],
+			sources: [],
+			currentPage: 1,
+			maxPages: 1,
+			selectedSource: ''
 		}
 	}
 
-	function handleChangeSource(selectedOption) {
-		setCurrentPage(1);
-		setSelectedSource(selectedOption == null ? '' : selectedOption.value);
-		setArticles([]);
+	handleShowMore() {
+		if (this.state.currentPage < this.state.maxPages) {
+			this.setState(prevState => ({
+				currentPage: prevState.currentPage + 1
+			}), () => this.getNews());
+		}
 	}
 
-	function getNews() {
+	handleChangeSource(selectedOption) {
+		this.setState({ currentPage: 1, selectedSource: selectedOption == null ? '' : selectedOption.value, articles: [] }, () => this.getNews());
+	}
+
+	getNews() {
 		let newsUrl;
-		if (selectedSource === '') {
-			newsUrl = `https://newsapi.org/v2/top-headlines?country=gb&pageSize=5&page=${currentPage}&apiKey=17fcb50c25f244a59d6a87fda4730bef`;
+		if (this.state.selectedSource === '') {
+			newsUrl = `https://newsapi.org/v2/top-headlines?country=gb&pageSize=5&page=${this.state.currentPage}&apiKey=17fcb50c25f244a59d6a87fda4730bef`;
 		} else {
-			newsUrl = `https://newsapi.org/v2/top-headlines?pageSize=5&page=${currentPage}&sources=${selectedSource}&apiKey=17fcb50c25f244a59d6a87fda4730bef`;
+			newsUrl = `https://newsapi.org/v2/top-headlines?pageSize=5&page=${this.state.currentPage}&sources=${this.state.selectedSource}&apiKey=17fcb50c25f244a59d6a87fda4730bef`;
 		}
 		axios.get(newsUrl)
 			.then(res => {
-				setArticles(prevArticles => [...prevArticles, ...res.data.articles]);
-				setMaxPages(Math.ceil(res.data.totalResults / 5));
+				for (let article of res.data.articles) {
+					this.setState(prevState => ({
+						articles: [...prevState.articles, article]
+					}));
+				}
+				this.setState({ maxPages: Math.ceil(res.data.totalResults / 5) });
 			})
 			.catch(err => console.log(err));
 	}
 
-	function getSources() {
+	getSources() {
 		axios.get(`https://newsapi.org/v2/sources?country=gb&apiKey=17fcb50c25f244a59d6a87fda4730bef`)
-			.then(res => {
-				setSources(res.data.sources.map(source => ({
+			.then(res => this.setState({ sources: res.data.sources }))
+			.catch(err => console.log(err));
+	}
+
+	componentWillMount() {
+		this.getNews();
+		this.getSources();
+	}
+
+	render() {
+		let articles;
+		let sources;
+
+		if (this.state.articles) {
+			articles = this.state.articles.map(article => {
+				return (
+					<NewsItem key={article.title} article={article} />
+				);
+			});
+		}
+
+		if (this.state.sources) {
+			sources = this.state.sources.map(source => {
+				return {
 					value: source.id,
 					label: source.name
-				})));
-			})
-			.catch(err => console.log(err));
-	}
+				};
+			});
+		}
 
-	return (
-		<div className="newsFeed">
-			<div className="newsFeed__heading d-flex flex-row align-items-center justify-content-between">
-				<h3 className="newsFeed__title">News</h3>
-				<Select
-					className="newsFeed__sources"
-					placeholder="Filter By Source"
-					value={selectedSource}
-					options={sources.length > 0 ? sources : null}
-					onChange={handleChangeSource}
-				/>
-			</div>
-			{articles.length > 0 ? (
-				<ul className="newsFeed__list">
-					<ReactCSSTransitionGroup
-						transitionName="newsItemsTransition"
-						transitionEnterTimeout={500}
-						transitionLeaveTimeout={300}>
-						{articles.map(article => (
-							<NewsItem key={article.title} article={article} />
-						))}
-					</ReactCSSTransitionGroup>
-				</ul>
-			) : (
-				<p className="newsFeed__empty">No news articles were found.</p>
-			)}
-			<button
-				className="newsFeed__more btn btn-primary"
-				onClick={handleShowMore}>
-				{currentPage === maxPages ? 'No More News' : 'Show More'}</button>
-			<p className="newsFeed__sponsor">Powered by <a href="https://newsapi.org/" target="_blank" rel="noopener noreferrer">News API</a>.</p>
+		return (
+			<div className="newsFeed">
+				<div className="newsFeed__heading d-flex flex-row align-items-center justify-content-between">
+					<h3 className="newsFeed__title">News</h3>
+					<Select
+						className="newsFeed__sources"
+						placeholder="Filter By Source"
+						value={this.state.selectedSource}
+						options={sources.length > 0 ? sources : null}
+						onChange={this.handleChangeSource.bind(this)}
+					/>
+				</div>
+				{articles.length > 0 ? (
+					<ul className="newsFeed__list">
+						<ReactCSSTransitionGroup
+							transitionName="newsItemsTransition"
+							transitionEnterTimeout={500}
+							transitionLeaveTimeout={300}>
+							{articles}
+						</ReactCSSTransitionGroup>
+					</ul>
+				) : (
+					<p className="newsFeed__empty">No news articles were found.</p>
+				)}
+				<button
+					className="newsFeed__more btn btn-primary"
+					onClick={this.handleShowMore.bind(this)}>
+					{this.state.currentPage === this.state.maxPages ? 'No More News' : 'Show More'}</button>
+				<p className="newsFeed__sponsor">Powered by <a href="https://newsapi.org/" target="_blank" rel="noopener noreferrer">News API</a>.</p>
 			</div>
 		)
 	}
-
+}
 
 export default PressReleaseWidget;
