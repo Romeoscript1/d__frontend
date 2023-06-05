@@ -41,7 +41,9 @@
 .css-1nmdiq5-menu{
 background-color: grey!important;
 }
-
+.swiper{
+  width: 80%!important;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
