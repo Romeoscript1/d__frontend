@@ -1,163 +1,137 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import logo from '../assets/logo-remove.png'
-
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import * as React from "react";
+import { NavLink } from "react-router-dom";
+import logo from "../assets/logo.jpeg";
+import { GrAnnounce } from "react-icons/gr";
+import { FaQuestion, FaClock } from "react-icons/fa";
+import { IconContext } from "react-icons";
+import { RxAvatar } from "react-icons/rx";
 
 function Navbar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  //Links for the first navbar
+  const navLinks = [
+    {
+      id: 1,
+      name: "FANTASY",
+      link: "Fantasy",
+    },
+    {
+      id: 20,
+      name: "SPORTSBOOK",
+      link: "Sportsbook",
+    },
+    {
+      id: 3,
+      name: "HORSE_RACING",
+      link: "Horse_Racing",
+    },
+    {
+      id: 4,
+      name: "FACEOFF",
+      link: "Faceoff",
+    },
+  ];
+  //Links for the second navbar
+  const secondaryLinks = [
+    {
+      id: 1,
+      name: "Lobby",
+      link: "Lobby",
+    },
+    {
+      id: 2,
+      name: "Upcoming",
+      link: "Upcoming",
+    },
+    {
+      id: 3,
+      name: "Live",
+      link: "Live",
+    },
+    {
+      id: 4,
+      name: "History",
+      link: "History",
+    },
+    {
+      id: 5,
+      name: "Friends",
+      link: "Friends",
+    },
+    {
+      id: 6,
+      name: "Research",
+      link: "Research",
+    },
+  ];
+  //Icons for the second navbar
+  const icons = [
+    {
+      id: 1,
+      icon: <FaClock />,
+    },
+    {
+      id: 2,
+      icon: <FaQuestion />,
+    },
+    {
+      id: 3,
+      icon: <GrAnnounce />,
+    },
+    {
+      id: 4,
+      icon: <RxAvatar />,
+    },
+  ];
 
   return (
-    <AppBar position="fixed" className='h-[80px]'>
-      <Container maxWidth="xl" className='h-full bg-[#130D25]'>
-        <Toolbar disableGutters style={{height:'100%'}}>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+    <header className="sticky top-0">
+      <nav className="text gap-1 bg-blue-900 px-4 h-10 py-2">
+        <ul className="flex gap-3">
+          {navLinks.map((link) => (
+            <li>
+              <NavLink to={link.link} key={link.id}>
+                {link.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <nav className="bg-blue-600 h-[80px] flex  justify-between items-center px-4">
+        <ul className="flex  gap-3 px-4 text-[18px]">
+          <img src={logo} alt="logo" className="w-full h-10 object-cover" />
+          {secondaryLinks.map((link) => (
+            <li>
+              <NavLink to={link.link} key={link.id}>
+                {link.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+        <div className="flex gap-4">
+          <article>
+            <h3>Get Cash</h3>
+            <p>08108079518</p>
+          </article>
+          <IconContext.Provider
+            value={{ className: "text-[20px] text-white  hover:text-black" }}
           >
-           <img src={logo} alt="" className='h-[100px] shadow-md shadow-color-gray-800 ' />
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' , justifyContent:'center'} }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+            {icons.map((icon) => (
+              <button
+                key={icon.id}
+                className="border rounded-[50%] px-2 hover:bg-white"
               >
-                {page}
-              </Button>
+                {icon.icon}
+              </button>
             ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+          </IconContext.Provider>
+          <article>
+            <h4 className="font-bold">$9.55</h4>
+            <button type="button">Balance</button>
+          </article>
+          <button className="bg-green-500 rounded-lg px-1"> Add Funds</button>
+        </div>
+      </nav>
+    </header>
   );
 }
 export default Navbar;
