@@ -8,7 +8,7 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 
 const SliderPerView = ({ children }) => {
   return (
-    <div className="p-[2rem] w-[80%] m-auto">
+    <div className="w-[100%]">
       <Swiper
         spaceBetween={30}
         autoplay={{
@@ -34,7 +34,7 @@ const SliderPerView = ({ children }) => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper p-[2rem]"
+        className="mySwiper"
       >
         <>{children}</>
       </Swiper>
