@@ -12,7 +12,7 @@ const Footer = () => {
     <>
       <section className="grid bg-[#130D25] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[2%] p-[1rem] text-white">
         <aside>
-          <img src={logo} alt=""  className="h-[80px]"/>
+          <img src={logo} alt="" className="h-[80px]" />
           <ul>
             <li>About us</li>
             <li>products</li>
@@ -61,7 +61,9 @@ const Footer = () => {
           </p>
         </aside>
       </section>
-      <p className="text-center text-white bg-[#130D25]">@Balldraft {new Date().getFullYear()}</p>
+      <p className="text-center text-white bg-[#130D25]">
+        @Balldraft {new Date().getFullYear()}
+      </p>
     </>
   );
 };
