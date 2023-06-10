@@ -2,35 +2,50 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #060019;
-
+  background-color: rgba(212, 202, 202, 0.808);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-.about_subtitle{
+
+.about_subtitle {
   font-family: Raleway;
   font-weight: 700;
   font-size: 3.125rem;
   text-transform: uppercase;
   line-height: 1.4;
   background: #880065;
-  background: linear-gradient(90deg,#880065,#d70021);
+  background: linear-gradient(90deg, #880065, #d70021);
   color: transparent;
   -webkit-background-clip: text;
   display: inline-block;
   margin-bottom: 0.938rem;
 }
-.terms{
-  background-image: url(../src/assets/ballbg.png);
-    background-repeat: no-repeat;
-    background-position: top;
+
+.unequalGrid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 1rem;
 }
+
+.unequalGrid2 {
+  display: grid;
+  grid-template-columns: 4fr 1.5fr 1fr;
+  grid-gap: 1rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.terms {
+  background-image: url(../src/assets/ballbg.png);
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
 .about {
   background-image: url(../src/assets/about-banner.png),
     url(../src/assets/banner-overlay.png), url(../src/assets/about-bg.png);
@@ -38,12 +53,15 @@
   background-position: right, right bottom -1px, top;
   background-size: contain;
 }
-.css-1nmdiq5-menu{
-background-color: grey!important;
+
+.css-1nmdiq5-menu {
+  background-color: grey !important;
 }
-.swiper{
-  width: 80%!important;
+
+.swiper {
+  width: 80% !important;
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
